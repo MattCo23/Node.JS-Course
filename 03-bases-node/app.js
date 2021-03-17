@@ -10,6 +10,6 @@ console.clear();
 
 // const base = 5;
 
-crearArchivo(argv.b, argv.l)
+crearArchivo(argv.b, argv.l, argv.h)
   .then((nombreArchivo) => console.log(nombreArchivo, 'creado'))
   .catch((err) => console.log(err));
