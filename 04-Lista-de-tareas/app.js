@@ -5,7 +5,6 @@ const Tareas = require('./models/tareas');
 
 const main = async () => {
   let opt = '';
-
   const tareas = new Tareas();
 
   do {
@@ -17,8 +16,9 @@ const main = async () => {
         const desc = await leerInput('Descripción:');
         tareas.crearTarea(desc);
         break;
+
       case '2':
-        console.log(tareas._listado);
+        console.log(tareas.listadoArr);
         break;
     }
 
