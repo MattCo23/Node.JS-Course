@@ -1,3 +1,5 @@
+'use strict';
+
 const Tarea = require('./tarea');
 require('colors');
 
@@ -35,12 +37,36 @@ class Tareas {
     console.log();
 
     for (let i = 0; i < tasks.length; i++) {
+      const idx = `${i + 1}`.green;
+      const { desc, completadoEn } = tasks[i];
       console.log(
-        `${`${i + 1}.`.green} ${tasks[i].desc} :: ${
-          tasks[i].completadoEn === null ? 'Pendiente'.red : 'Completada'.green
+        `${idx} ${desc} :: ${
+          completadoEn === null ? 'Pendiente'.red : 'Completada'.green
         }`
       );
     }
+  }
+
+  listarPendientesCompletadas(completadas = true) {
+    const tasks = this.listadoArr;
+    let contador = 0;
+    console.log();
+
+    tasks.forEach((task) => {
+      const { desc, completadoEn } = task;
+
+      if (completadas && completadoEn) {
+        contador += 1;
+        console.log(
+          `${(contador + '.').green} ${desc} :: ${
+            completadoEn.toString().green
+          }`
+        );
+      } else if (!completadas && !completadoEn) {
+        contador += 1;
+        console.log(`${(contador + '.').green} ${desc} :: ${'Pendiente'.red}`);
+      }
+    });
   }
 }
 
