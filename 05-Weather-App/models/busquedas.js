@@ -7,12 +7,24 @@ class Busquedas {
     // TODO: leer DB si existe
   }
 
+  get paramsMapbox() {
+    return {
+      access_token: process.env.MAPBOX_KEY,
+      limit: 5,
+      language: 'es',
+    };
+  }
+
   async ciudad(lugar = '') {
     try {
       // peticion http
-      const resp = await axios.get(
-        'https://api.mapbox.com/geocoding/v5/mapbox.places/ottawa.json?access_token=pk.eyJ1IjoibWF0dGNvMjMiLCJhIjoiY2tuYWVoOG5jMG16eDJwbXJpMTl5bGhrMiJ9.CsxND9sZzMSTVR6vqK5lcQ&limit=5&language=es'
-      );
+      const instance = axios.create({
+        baseURL: `https://api.mapbox.com/geocoding/v5/mapbox.places/${lugar}.json`,
+        params: this.paramsMapbox,
+      });
+
+      const resp = await instance.get();
+
       console.log(resp.data);
 
       return [];
